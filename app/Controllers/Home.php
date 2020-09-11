@@ -4,15 +4,23 @@ class Home extends BaseController
 {
 	public function index()
 	{
-	    //$this->load->helper('helperAdi');
-	    helper('common');
-	    //$this->load->view('hello_world'); eski versiyon için hatırlatma amaçlı yazıldı.
-		return view('hello_world');
+        echo view('common/header');
+        echo view('hello_world');
+        echo view('common/footer');
 	}
 
 	//--------------------------------------------------------------------
     public function about()
     {
-        return view('about');
+        echo view('common/header');
+        echo view('about');
+        echo view('common/footer');
+    }
+
+    public function contact()
+    {
+        echo view('common/header');
+        echo view('contact');
+        echo view('common/footer');
     }
 }
