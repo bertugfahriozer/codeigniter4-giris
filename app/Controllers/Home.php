@@ -1,5 +1,6 @@
 <?php namespace App\Controllers;
 
+use App\Models\BlogModel;
 class Home extends BaseController
 {
     public function index()
@@ -37,6 +38,15 @@ class Home extends BaseController
                               'stock' => 90]];
         echo view('common/header');
         echo view('products/productList', $data);
+        echo view('common/footer');
+    }
+
+    public function blogList()
+    {
+        $blogModel=new BlogModel();
+        $data=['blogs'=>$blogModel->blogList('title,content,categoryName,blog_categories.pk',[])];
+        echo view('common/header');
+        echo view('blog/blogList',$data);
         echo view('common/footer');
     }
 }
