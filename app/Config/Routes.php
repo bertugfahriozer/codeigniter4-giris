@@ -35,7 +35,7 @@ $routes->get('about', 'Home::about');
 $routes->get('contact', 'Home::contact');
 $routes->get('productList', 'Home::productList');
 $routes->get('blogList', 'Home::blogList');
-$routes->get('category', 'Home::blogCategory');
+$routes->add('category/(:any)', 'Home::blogCategory/$1');
 
 /**
  * --------------------------------------------------------------------
