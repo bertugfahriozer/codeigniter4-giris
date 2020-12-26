@@ -1,6 +1,6 @@
 <?php namespace App\Controllers;
 
-use App\Models\BlogModel;
+
 class Home extends BaseController
 {
     public function index()
@@ -43,10 +43,23 @@ class Home extends BaseController
 
     public function blogList()
     {
-        $blogModel=new BlogModel();
-        $data=['blogs'=>$blogModel->blogList('title,content,categoryName,blog_categories.pk',[])];
+        $data=['params'=>[
+            'where'=>[],
+            'select'=>'title,content,categoryName,blog_categories.pk']
+        ];
         echo view('common/header');
         echo view('blog/blogList',$data);
         echo view('common/footer');
+    }
+
+    public function blogCategory()
+    {
+            $data = ['params' => [
+                'where' => ['blog_categories.seflink' => 'codeigniter-4'],
+                'select' => 'title,content,categoryName,blog_categories.pk']
+            ];
+            echo view('common/header');
+            echo view('blog/blogList', $data);
+            echo view('common/footer');
     }
 }

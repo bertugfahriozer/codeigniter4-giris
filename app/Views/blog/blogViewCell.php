@@ -1,4 +1,6 @@
+<?php foreach ($blogs as $item) : ?>
 <div class="col-4 card">
-    <div class="card-header"><?= $title . ' - ' . $categoryName ?></div>
-    <div class="card-body"><?= $content ?></div>
+    <div class="card-header"><?= $item['title'] . ' - ' . $item['categoryName'] ?></div>
+    <div class="card-body"><?= $item['content'] ?></div>
 </div>
+<?php endforeach; ?>

@@ -26,6 +26,12 @@
                 <a class="nav-link" href="<?=base_url('about')?>">Hakkımızda</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="<?=base_url('blogList')?>">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?=base_url('category')?>">Codeigniter 4</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<?=base_url('contact')?>">İletişim</a>
             </li>
         </ul>

@@ -19,3 +19,6 @@ alter table blogs
     add constraint blogs_blog_categories__fk
         foreign key (category) references blog_categories (pk)
             on update cascade on delete cascade;
+
+alter table blog_categories
+    add sefLink varchar(255) null;
