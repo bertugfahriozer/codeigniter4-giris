@@ -1,4 +1,11 @@
-<div class="container">
+<?= $this->extend('base') ?>
+<?= $this->section('head')?>
+<meta name="description" content="Free Web tutorials">
+<meta name="keywords" content="HTML, CSS, JavaScript">
+<meta name="author" content="John Doe">
+<title>Blog</title>
+<?=$this->endSection()?>
+<?= $this->section('content') ?>
     <div class="row">
         <div class="col-9">
             <div class="row">
@@ -13,5 +20,4 @@
             </ul>
         </div>
     </div>
-
-</div>
+<?= $this->endSection() ?>

@@ -8,24 +8,18 @@ class Home extends BaseController
 {
     public function index()
     {
-        echo view('common/header');
-        echo view('hello_world');
-        echo view('common/footer');
+        return view('hello_world');
     }
 
     //--------------------------------------------------------------------
     public function about()
     {
-        echo view('common/header');
-        echo view('about');
-        echo view('common/footer');
+        return view('about');
     }
 
     public function contact()
     {
-        echo view('common/header');
-        echo view('contact');
-        echo view('common/footer');
+        return view('contact');
     }
 
     public function productList()
@@ -39,9 +33,7 @@ class Home extends BaseController
                              ['productTitle' => 'Logitech Sessiz Fare',
                               'productCategory' => 'Mouse',
                               'stock' => 90]];
-        echo view('common/header');
-        echo view('products/productList', $data);
-        echo view('common/footer');
+        return view('products/productList', $data);
     }
 
     public function blogList()
@@ -52,9 +44,7 @@ class Home extends BaseController
             'select'=>'title,content,categoryName,blog_categories.pk'],
             'blogCats'=>$blogModel->blogCat('categoryName,sefLink',[])
         ];
-        echo view('common/header');
-        echo view('blog/blogList',$data);
-        echo view('common/footer');
+        return view('blog/blogList',$data);
     }
 
     public function blogCategory($catName)
@@ -65,8 +55,6 @@ class Home extends BaseController
                 'select' => 'title,content,categoryName,blog_categories.pk'],
                 'blogCats'=>$blogModel->blogCat('categoryName,sefLink',[])
             ];
-            echo view('common/header');
-            echo view('blog/blogList', $data);
-            echo view('common/footer');
+            return view('blog/blogList', $data);
     }
 }

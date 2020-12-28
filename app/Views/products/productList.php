@@ -1,3 +1,11 @@
+<?= $this->extend('base') ?>
+<?= $this->section('head')?>
+<meta name="description" content="Free Web tutorials">
+<meta name="keywords" content="HTML, CSS, JavaScript">
+<meta name="author" content="John Doe">
+    <title>Ürün Listesi</title>
+<?=$this->endSection()?>
+<?= $this->section('content') ?>
 <table class="table table-sm-responsive table-bordered table-striped">
     <thead>
     <td>Ürün Adı</td>
@@ -47,3 +55,4 @@
     <?php endforeach; ?>
     </tbody>
 </table>
+<?= $this->endSection() ?>
