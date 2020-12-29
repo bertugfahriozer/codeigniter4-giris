@@ -13,7 +13,8 @@
     <td>Ürün Adet</td>
     </thead>
     <tbody>
-    <?php foreach ($products as $product): ?>
+    <?php
+    foreach ($products as $product): ?>
         <!--
         ürün stoğu 10 dan azsa yeşil
         ürün stoğu 5 ve 5 ten azsa turuncu
@@ -33,19 +34,21 @@
         else
             echo '';*/
 
-        switch ($product['stock']) {
-            case ($product['stock'] < 10 && $product['stock'] > 5):
-                echo ' class="bg-success text-light font-weight-bold"';
-                break;
-            case ($product['stock'] <= 5 && $product['stock'] > 1):
-                echo ' class="bg-warning text-light font-weight-bold"';
-                break;
-            case ($product['stock'] == 1):
-                echo ' class="bg-danger text-light font-weight-bold"';
-                break;
-            default:
-                echo '';
-                break;
+        if(!empty($product['stock'])) {
+            switch ($product['stock']) {
+                case ($product['stock'] < 10 && $product['stock'] > 5):
+                    echo ' class="bg-success text-light font-weight-bold"';
+                    break;
+                case ($product['stock'] <= 5 && $product['stock'] > 1):
+                    echo ' class="bg-warning text-light font-weight-bold"';
+                    break;
+                case ($product['stock'] == 1):
+                    echo ' class="bg-danger text-light font-weight-bold"';
+                    break;
+                default:
+                    echo '';
+                    break;
+            }
         }
         ?>>
             <td><?= $product['productTitle'] ?></td>

@@ -1,30 +1,19 @@
 <?php namespace App\Controllers;
 
-
-use App\Libraries\Blog;
 use App\Models\BlogModel;
 
 class Home extends BaseController
 {
-    public function index()
+    public function index($sefLink='/')
     {
-        return view('hello_world');
-    }
-
-    //--------------------------------------------------------------------
-    public function about()
-    {
-        return view('about');
-    }
-
-    public function contact()
-    {
-        return view('contact');
+        $data=['navs'=>$this->navs,
+            'pageContent'=>$this->pageModel->pageInfo('*',['sefLink'=>$sefLink])];
+        return view('pages',$data);
     }
 
     public function productList()
     {
-        $data['products'] = [['productTitle' => 'NortPas Şınav Tahtası',
+        $data=['products'=> [['productTitle' => 'NortPas Şınav Tahtası',
                               'productCategory' => 'Spor Malzemeleri',
                               'stock' => 34],
                              ['productTitle' => 'HP Pavilion G135',
@@ -32,29 +21,24 @@ class Home extends BaseController
                               'stock' => 3],
                              ['productTitle' => 'Logitech Sessiz Fare',
                               'productCategory' => 'Mouse',
-                              'stock' => 90]];
+                              'stock' => 90]],
+            'navs'=>$this->navs];
+
         return view('products/productList', $data);
     }
 
-    public function blogList()
+    public function blogList($catName='')
     {
         $blogModel=new BlogModel();
+        $where=[];
+        if(!empty($catName))
+            $where=['blog_categories.seflink' => $catName];
         $data=['params'=>[
-            'where'=>[],
+            'where'=>$where,
             'select'=>'title,content,categoryName,blog_categories.pk'],
-            'blogCats'=>$blogModel->blogCat('categoryName,sefLink',[])
+            'blogCats'=>$blogModel->blogCat('categoryName,sefLink',[]),
+            'navs'=>$this->navs
         ];
         return view('blog/blogList',$data);
-    }
-
-    public function blogCategory($catName)
-    {
-        $blogModel=new BlogModel();
-            $data = ['params' => [
-                'where' => ['blog_categories.seflink' => $catName],
-                'select' => 'title,content,categoryName,blog_categories.pk'],
-                'blogCats'=>$blogModel->blogCat('categoryName,sefLink',[])
-            ];
-            return view('blog/blogList', $data);
     }
 }

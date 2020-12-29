@@ -22,3 +22,16 @@ alter table blogs
 
 alter table blog_categories
     add sefLink varchar(255) null;
+
+create table pages
+(
+    pages_pk int(11) unsigned auto_increment,
+    pageTitle varchar(255) not null,
+    pageContent text not null,
+    description tinytext null,
+    keywords tinytext null,
+    sefLink tinytext not null,
+    sort tinyint(1) not null,
+    constraint pages_pk
+        primary key (pages_pk)
+);

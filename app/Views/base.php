@@ -19,21 +19,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="<?=base_url('productList')?>">Ürünler</a>
-            </li>
+            <?php foreach ($navs as $page) : ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?=base_url('about')?>">Hakkımızda</a>
+                <a class="nav-link" href="<?=base_url('pages/'.$page['sefLink'])?>"><?=$page['pageTitle']?></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?=base_url('blogList')?>">Blog</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?=base_url('productList')?>">Ürün Listesi</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?=base_url('contact')?>">İletişim</a>
-            </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </nav>

@@ -15,6 +15,7 @@ namespace App\Controllers;
  */
 
 use CodeIgniter\Controller;
+use App\Models\PageModel;
 
 class BaseController extends Controller
 {
@@ -27,7 +28,8 @@ class BaseController extends Controller
 	 * @var array
 	 */
 	protected $helpers = ['common'];
-
+    protected $pageModel;
+    protected $navs;
 	/**
 	 * Constructor.
 	 */
@@ -41,6 +43,8 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// E.g.:
 		// $this->session = \Config\Services::session();
+        $this->pageModel=new PageModel();
+        $this->navs=$this->pageModel->pageList('pageTitle,sefLink',['sort>'=>0]);
 	}
 
 }
