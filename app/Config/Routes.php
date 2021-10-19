@@ -35,6 +35,15 @@ $routes->add('pages/(:any)', 'Home::index/$1');
 $routes->get('blogList', 'Home::blogList');
 $routes->add('category/(:any)', 'Home::blogList/$1');
 $routes->get('productList', 'Home::productList');
+$routes->get('contact', 'Home::contact');
+$routes->get('tags', 'Home::tagList');
+$routes->get('tag_add', 'Home::tagAddView');
+$routes->post('tag_add', 'Home::tagAdd');
+$routes->get('tagUpdate/(:num)', 'Home::tagUpdateView/$1');
+$routes->post('tagUpdate/(:num)', 'Home::tagUpdate/$1');
+$routes->get('tagDelete/(:num)', 'Home::tagDelete/$1');
+$routes->get('recoveryTag/(:num)', 'Home::recoveryTag/$1');
+$routes->get('deletedTags', 'Home::deletedTags');
 
 /**
  * --------------------------------------------------------------------

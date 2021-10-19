@@ -35,3 +35,18 @@ create table pages
     constraint pages_pk
         primary key (pages_pk)
 );
+
+create table tags
+(
+    id int(11) unsigned auto_increment,
+    tag varchar(255) null,
+    constraint tags_pk
+        primary key (id)
+);
+
+alter table tags
+    add created_at datetime null;
+
+alter table tags
+    add updated_at datetime null;
+

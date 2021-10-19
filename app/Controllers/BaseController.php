@@ -1,6 +1,5 @@
 <?php
 namespace App\Controllers;
-
 /**
  * Class BaseController
  *
@@ -19,7 +18,6 @@ use App\Models\PageModel;
 
 class BaseController extends Controller
 {
-
 	/**
 	 * An array of helpers to be loaded automatically upon
 	 * class instantiation. These helpers will be available
