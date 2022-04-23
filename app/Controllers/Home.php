@@ -24,7 +24,6 @@ class Home extends BaseController
                               'productCategory' => 'Mouse',
                               'stock' => 90]],
             'navs'=>$this->navs];
-
         return view('products/productList', $data);
     }
 
@@ -32,8 +31,7 @@ class Home extends BaseController
     {
         $blogModel=new BlogModel();
         $where=[];
-        if(!empty($catName))
-            $where=['blog_categories.seflink' => $catName];
+        if(!empty($catName)) $where=['blog_categories.seflink' => $catName];
         $data=['params'=>[
             'where'=>$where,
             'select'=>'title,content,categoryName,blog_categories.pk'],
@@ -68,8 +66,7 @@ class Home extends BaseController
         $tagModel=new TagModel();
         $return=$tagModel->insert(['tag'=>$this->request->getPost('tag')]);
 
-        if($return===false)
-            return redirect()->back()->withInput()->with('errors',$tagModel->errors());
+        if($return===false) return redirect()->back()->withInput()->with('errors',$tagModel->errors());
 
         return redirect()->back()->with('message','Başarılı bir şekilde kayıt edildi.');
     }
@@ -87,8 +84,7 @@ class Home extends BaseController
         $tagModel=new TagModel();
         $return=$tagModel->update($pk,['tag'=>$this->request->getPost('tag')]);
 
-        if($return===false)
-            return redirect()->back()->withInput()->with('errors',$tagModel->errors());
+        if($return===false) return redirect()->back()->withInput()->with('errors',$tagModel->errors());
 
         return redirect()->to('/tags')->with('message','Başarılı bir şekilde güncellendi.');
     }
@@ -98,8 +94,7 @@ class Home extends BaseController
         $tagModel=new TagModel();
         $return=$tagModel->delete($pk);
 
-        if($return===false)
-            return redirect()->back()->with('errors',$tagModel->errors());
+        if($return===false) return redirect()->back()->with('errors',$tagModel->errors());
 
         return redirect()->back()->with('message','Başarılı bir şekilde kayıt edildi.');
     }
@@ -110,8 +105,7 @@ class Home extends BaseController
         $data=['id'=>$pk,'deleted_at'=>NULL];
         $return=$tagModel->save($data);
 
-        if($return===false)
-            return redirect()->back()->with('errors',$tagModel->errors());
+        if($return===false) return redirect()->back()->with('errors',$tagModel->errors());
 
         return redirect()->to('/tags')->with('message','Başarılı bir şekilde silinenlerden kaldırıldı.');
     }

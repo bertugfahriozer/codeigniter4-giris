@@ -25,7 +25,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['common'];
+	protected $helpers = [];
     protected $pageModel;
     protected $navs;
 	/**
@@ -42,7 +42,6 @@ class BaseController extends Controller
 		// E.g.:
 		// $this->session = \Config\Services::session();
         $this->pageModel=new PageModel();
-        $this->navs=$this->pageModel->pageList('pageTitle,sefLink',['sort>'=>0]);
+        $this->navs=$this->pageModel->select('pageTitle,sefLink')->where(['sort>'=>0])->orderBy('sort','asc')->findAll();
 	}
-
 }

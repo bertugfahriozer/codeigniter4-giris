@@ -7,15 +7,7 @@ class PageModel extends Model
 {
     protected $DBGroup = 'default';
     protected $table ='pages';
-
-    public function pageList($select,$where)
-    {
-        $page=new PageModel();
-        return $page->select($select)
-            ->where($where)
-            ->orderBy('sort','asc')
-            ->findAll();
-    }
+    protected $allowedFields=['pageContent'];
 
     public function pageInfo($select,$where)
     {
