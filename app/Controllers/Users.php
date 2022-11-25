@@ -2,6 +2,8 @@
 
 use App\Controllers\BaseController;
 use App\Entities\UsersEntity;
+use App\Libraries\CommonLibrary;
+use App\Models\CommonModel;
 use App\Models\UsersModel;
 
 class Users extends BaseController
@@ -40,5 +42,16 @@ class Users extends BaseController
 
         if($this->userModel->save($user)===true)
         echo 'Güncellendi';
+    }
+
+    public function simpleOwnUpdate()
+    {
+        $cModel=new CommonModel();
+        $result=$cModel->selectOne('users',[]);
+        $lib=new CommonLibrary();
+        if(!empty($result->password)) {
+            $updatedPass = $lib->setPassword($result, '123456');
+        }
+        return var_dump($cModel->edit('users',$updatedPass,['id'=>1]));
     }
 }
