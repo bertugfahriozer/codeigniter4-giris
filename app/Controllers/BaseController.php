@@ -13,6 +13,7 @@ namespace App\Controllers;
  * @package CodeIgniter
  */
 
+use ci4shoppingcart\Libraries\Cart;
 use CodeIgniter\Controller;
 use App\Models\PageModel;
 use CodeIgniter\HTTP\CLIRequest;
@@ -40,6 +41,7 @@ abstract class BaseController extends Controller
 	protected $helpers = [];
     protected $pageModel;
     protected $navs;
+    public $defData;
 	/**
 	 * Constructor.
 	 */
@@ -55,5 +57,7 @@ abstract class BaseController extends Controller
 		// $this->session = \Config\Services::session();
         $this->pageModel=new PageModel();
         $this->navs=$this->pageModel->select('pageTitle,sefLink')->where(['sort>'=>0])->orderBy('sort','asc')->findAll();
+        $this->defData=['cart'=>new Cart(),
+            'navs'=>$this->navs,];
 	}
 }

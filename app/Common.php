@@ -24,3 +24,7 @@ function _printrDie($data){
     echo '</pre>';
     die();
 }
+
+function show_404(){
+    throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+}

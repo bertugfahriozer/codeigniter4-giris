@@ -2,119 +2,122 @@
 
 use App\Models\BlogModel;
 use App\Models\TagModel;
+use CodeIgniter\API\ResponseTrait;
 
 class Home extends BaseController
 {
-    public function index($sefLink='/')
+    use ResponseTrait;
+
+    public function index($sefLink = '/')
     {
-        $data=['navs'=>$this->navs,
-            'pageContent'=>$this->pageModel->pageInfo('*',['sefLink'=>$sefLink])];
-        return view('pages',$data);
+        $this->defData['pageContent'] = $this->pageModel->pageInfo('*', ['sefLink' => $sefLink]);
+        return view('pages', $this->defData);
     }
 
     public function productList()
     {
-        $data=['products'=> [['productTitle' => 'NortPas Şınav Tahtası',
-                              'productCategory' => 'Spor Malzemeleri',
-                              'stock' => 34],
-                             ['productTitle' => 'HP Pavilion G135',
-                              'productCategory' => 'Laptop',
-                              'stock' => 3],
-                             ['productTitle' => 'Logitech Sessiz Fare',
-                              'productCategory' => 'Mouse',
-                              'stock' => 90]],
-            'navs'=>$this->navs];
-        return view('products/productList', $data);
+        $this->defData['products'] =
+            [
+                ['id' => 1,
+                    'productTitle' => 'NortPas Şınav Tahtası',
+                    'productCategory' => 'Spor Malzemeleri',
+                    'price' => 24,
+                    'stock' => 34],
+                ['id' => 2,
+                    'productTitle' => 'HP Pavilion G135',
+                    'productCategory' => 'Laptop',
+                    'price' => 47,
+                    'stock' => 3],
+                ['id' => 3,
+                    'productTitle' => 'Logitech Sessiz Fare',
+                    'productCategory' => 'Mouse',
+                    'price' => 8,
+                    'stock' => 90]
+            ];
+        return view('products/productList', $this->defData);
     }
 
-    public function blogList($catName='')
+    public function blogList($catName = '')
     {
-        $blogModel=new BlogModel();
-        $where=[];
-        if(!empty($catName)) $where=['blog_categories.seflink' => $catName];
-        $data=['params'=>[
-            'where'=>$where,
-            'select'=>'title,content,categoryName,blog_categories.pk'],
-            'blogCats'=>$blogModel->blogCat('categoryName,sefLink',[]),
-            'navs'=>$this->navs
-        ];
-        return view('blog/blogList',$data);
+        $blogModel = new BlogModel();
+        $where = [];
+        if (!empty($catName)) $where = ['blog_categories.seflink' => $catName];
+        $this->defData['params'] = [
+            'where' => $where,
+            'select' => 'title,content,categoryName,blog_categories.pk'];
+        $this->defData['blogCats'] = $blogModel->blogCat('categoryName,sefLink', []);
+        return view('blog/blogList', $this->defData);
     }
 
     public function contact()
     {
-        $data=['navs'=>$this->navs];
-        return view('contact',$data);
+        return view('contact', $this->defData);
     }
 
     public function tagList()
     {
-        $tagModel=new TagModel();
-        $data=['navs'=>$this->navs,
-        'tags'=>$tagModel->findAll()];
-        return view('tagList',$data);
+        $tagModel = new TagModel();
+        $this->defData['tags'] = $tagModel->findAll();
+        return view('tagList', $this->defData);
     }
 
     public function tagAddView()
     {
-        $data=['navs'=>$this->navs];
-        return view('tagAdd',$data);
+        return view('tagAdd', $this->defData);
     }
 
     public function tagAdd()
     {
-        $tagModel=new TagModel();
-        $return=$tagModel->insert(['tag'=>$this->request->getPost('tag')]);
+        $tagModel = new TagModel();
+        $return = $tagModel->insert(['tag' => $this->request->getPost('tag')]);
 
-        if($return===false) return redirect()->back()->withInput()->with('errors',$tagModel->errors());
+        if ($return === false) return redirect()->back()->withInput()->with('errors', $tagModel->errors());
 
-        return redirect()->back()->with('message','Başarılı bir şekilde kayıt edildi.');
+        return redirect()->back()->with('message', 'Başarılı bir şekilde kayıt edildi.');
     }
 
     public function tagUpdateView($pk)
     {
-        $tagModel=new TagModel();
-        $data=['navs'=>$this->navs,
-            'tag'=>$tagModel->find($pk)];
-        return view('tagUpdate',$data);
+        $tagModel = new TagModel();
+            $this->defData['tag'] = $tagModel->find($pk);
+        return view('tagUpdate', $this->defData);
     }
 
     public function tagUpdate($pk)
     {
-        $tagModel=new TagModel();
-        $return=$tagModel->update($pk,['tag'=>$this->request->getPost('tag')]);
+        $tagModel = new TagModel();
+        $return = $tagModel->update($pk, ['tag' => $this->request->getPost('tag')]);
 
-        if($return===false) return redirect()->back()->withInput()->with('errors',$tagModel->errors());
+        if ($return === false) return redirect()->back()->withInput()->with('errors', $tagModel->errors());
 
-        return redirect()->to('/tags')->with('message','Başarılı bir şekilde güncellendi.');
+        return redirect()->to('/tags')->with('message', 'Başarılı bir şekilde güncellendi.');
     }
 
     public function tagDelete($pk)
     {
-        $tagModel=new TagModel();
-        $return=$tagModel->delete($pk);
+        $tagModel = new TagModel();
+        $return = $tagModel->delete($pk);
 
-        if($return===false) return redirect()->back()->with('errors',$tagModel->errors());
+        if ($return === false) return redirect()->back()->with('errors', $tagModel->errors());
 
-        return redirect()->back()->with('message','Başarılı bir şekilde kayıt edildi.');
+        return redirect()->back()->with('message', 'Başarılı bir şekilde kayıt edildi.');
     }
 
     public function recoveryTag($pk)
     {
-        $tagModel=new TagModel();
-        $data=['id'=>$pk,'deleted_at'=>NULL];
-        $return=$tagModel->save($data);
+        $tagModel = new TagModel();
+        $data = ['id' => $pk, 'deleted_at' => NULL];
+        $return = $tagModel->save($data);
 
-        if($return===false) return redirect()->back()->with('errors',$tagModel->errors());
+        if ($return === false) return redirect()->back()->with('errors', $tagModel->errors());
 
-        return redirect()->to('/tags')->with('message','Başarılı bir şekilde silinenlerden kaldırıldı.');
+        return redirect()->to('/tags')->with('message', 'Başarılı bir şekilde silinenlerden kaldırıldı.');
     }
 
     public function deletedTags()
     {
-        $tagModel=new TagModel();
-        $data=['navs'=>$this->navs,
-            'tags'=>$tagModel->onlyDeleted()->findAll()];
-        return view('tagList',$data);
+        $tagModel = new TagModel();
+            $this->defData['tags'] = $tagModel->onlyDeleted()->findAll();
+        return view('tagList', $this->defData);
     }
 }

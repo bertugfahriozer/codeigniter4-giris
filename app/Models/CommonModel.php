@@ -20,8 +20,7 @@ class CommonModel
     public function create($table, $data = [])
     {
         $builder=$this->db->table($table);
-        $builder->insert($data);
-        return $builder->insertID();
+        return$builder->insert($data);
     }
 
     public function edit($table, $data = [], $where = [])
@@ -42,7 +41,7 @@ class CommonModel
         return $builder -> select($select) -> where($where)-> get()->getRow();
     }
 
-    public function whereInCheckData($att, $where = [], $table)
+    public function whereInCheckData($table,$att, array $where = [])
     {
         $builder=$this->db->table($table);
         return $builder -> whereIn($att, $where,1) ->get()-> getNumRows();
@@ -61,7 +60,7 @@ class CommonModel
         return $builder -> where($where) -> countAllResults();
     }
 
-    public function research($like = [], $table, $select = '*', $where = [])
+    public function research($table,$like = [], $select = '*', $where = [])
     {
         $builder=$this->db->table($table);
         return $builder -> select($select) -> where($where) -> like($like) -> get() -> getResult();

@@ -44,6 +44,13 @@ $routes->get('recoveryTag/(:num)', 'Home::recoveryTag/$1');
 $routes->get('deletedTags', 'Home::deletedTags');
 $routes->post('contactForm','Pageforms::contactForm',['as'=>'contactForm']);
 
+$routes->get('basket','Product::basket');
+$routes->post('successfullBasket','Product::successfullBasket',['as'=>'successfullBasket']);
+$routes->post('addBasket','Product::addBasket');
+$routes->post('updateBasket','Product::updateBasket');
+$routes->post('removeBasketOne','Product::removeBasketOne');
+$routes->post('emptyTheBasket','Product::emptyTheBasket');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
