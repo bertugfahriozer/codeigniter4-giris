@@ -4,8 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "439b29a09ca054ce2646359b9b1bb2ae",
+    "content-hash": "cad557120fd535a693bd768da51696a9",
     "packages": [
+        {
+            "name": "bertugfahriozer/ci4commonmodel",
+            "version": "1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bertugfahriozer/ci4commonModel.git",
+                "reference": "aec5e289f56b48dd3ae9653ceee829aa2f3a1f91"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bertugfahriozer/ci4commonModel/zipball/aec5e289f56b48dd3ae9653ceee829aa2f3a1f91",
+                "reference": "aec5e289f56b48dd3ae9653ceee829aa2f3a1f91",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3||^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ci4commonmodel\\": "app/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bertuğ Fahri ÖZER",
+                    "email": "bertugfahriozer@gmail.com",
+                    "homepage": "https://bertugfahriozer.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "With the codeigniter 4 database builder, I combined the general methods I used for myself into a single model.",
+            "support": {
+                "forum": "https://bertugfahriozer.com/",
+                "issues": "https://github.com/bertugfahriozer/ci4commonModel/issues",
+                "source": "https://github.com/bertugfahriozer/ci4mongodblibrary"
+            },
+            "time": "2023-03-18T00:22:55+00:00"
+        },
         {
             "name": "bertugfahriozer/ci4shoppingcart",
             "version": "1.0.4",
@@ -1899,5 +1942,5 @@
         "php": ">=7.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

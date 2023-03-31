@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 /**
  * Class BaseController
@@ -21,6 +22,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use ci4commonmodel\Models\CommonModel;
 
 abstract class BaseController extends Controller
 {
@@ -31,33 +33,35 @@ abstract class BaseController extends Controller
      */
     protected $request;
 
-	/**
-	 * An array of helpers to be loaded automatically upon
-	 * class instantiation. These helpers will be available
-	 * to all other controllers that extend BaseController.
-	 *
-	 * @var array
-	 */
-	protected $helpers = [];
+    /**
+     * An array of helpers to be loaded automatically upon
+     * class instantiation. These helpers will be available
+     * to all other controllers that extend BaseController.
+     *
+     * @var array
+     */
+    protected $helpers = [];
     protected $pageModel;
     protected $navs;
     public $defData;
-	/**
-	 * Constructor.
-	 */
-    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-	{
-		// Do Not Edit This Line
-        parent::initController($request, $response, $logger);
+    public $commonModel;
 
-		//--------------------------------------------------------------------
-		// Preload any models, libraries, etc, here.
-		//--------------------------------------------------------------------
-		// E.g.:
-		// $this->session = \Config\Services::session();
-        $this->pageModel=new PageModel();
-        $this->navs=$this->pageModel->select('pageTitle,sefLink')->where(['sort>'=>0])->orderBy('sort','asc')->findAll();
-        $this->defData=['cart'=>new Cart(),
-            'navs'=>$this->navs,];
-	}
+    /**
+     * Constructor.
+     */
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+    {
+        // Do Not Edit This Line
+        parent::initController($request, $response, $logger);
+        $this->commonModel = new CommonModel();
+        //--------------------------------------------------------------------
+        // Preload any models, libraries, etc, here.
+        //--------------------------------------------------------------------
+        // E.g.:
+        // $this->session = \Config\Services::session();
+        $this->pageModel = new PageModel();
+        $this->navs = $this->pageModel->select('pageTitle,sefLink')->where(['sort>' => 0])->orderBy('sort', 'asc')->findAll();
+        $this->defData = ['cart' => new Cart(),
+            'navs' => $this->navs];
+    }
 }

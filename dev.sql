@@ -50,3 +50,12 @@ alter table tags
 alter table tags
     add updated_at datetime null;
 
+create table contactForm
+(
+    id         int(11) unsigned auto_increment,
+    postinputs text null,
+    fileinputs text null,
+    constraint contactForm_pk
+        primary key (id)
+);
+

@@ -7,7 +7,8 @@
 	"require": {
 		"php": ">=7.2",
 		"codeigniter4/framework": "^4",
-		"bertugfahriozer/ci4shoppingcart": "^1.0"
+		"bertugfahriozer/ci4shoppingcart": "^1.0",
+		"bertugfahriozer/ci4commonmodel": "^1.1"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "^1.9@dev",
