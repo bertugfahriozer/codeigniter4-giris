@@ -5,7 +5,7 @@ class Pageforms extends BaseController
     public function contactForm()
     {
         //if(strtolower($this->request->getMethod()) ==='post'){}
-
+//dd($_FILES);
         $valData = ([
             'fullName' => ['label' => 'Ad Soyad', 'rules' => 'required'],
             'email' => ['label' => 'E-mail', 'rules' => 'required|valid_email'],
@@ -34,6 +34,23 @@ class Pageforms extends BaseController
         }
         $fileInfos=json_decode($data['fileinputs']);
         echo '<img src="/uploads/'.$fileInfos->fileName.'">';
+
+        foreach ($this->request->getFileMultiple('multiFile') as $fileInfo) {
+            $randName=$fileInfo->getRandomName();
+            if(!$fileInfo->hasMoved() && $fileInfo->move(ROOTPATH.'public/uploads/',$randName)){
+                $data=[
+                    'postinputs'=>json_encode($this->request->getPost(),JSON_UNESCAPED_UNICODE),
+                    'fileinputs'=>json_encode([
+                        'create_at'=>date('d-m-Y H:i:s'),
+                        'fileName'=>$randName,
+                        'fileSize'=>$fileInfo->getSizeByUnit(),
+                        'mimeType'=>$fileInfo->getClientMimeType()
+                    ],JSON_UNESCAPED_UNICODE)
+                ];
+                $this->commonModel->create('contactForm',$data);
+            }
+            d($fileInfo->getError());
+        }
         _printrDie($_FILES);
     }
 }

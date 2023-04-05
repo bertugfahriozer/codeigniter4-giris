@@ -36,6 +36,11 @@
             <input type="file" name="feed" id="feed" accept="image/jpeg, image/jpg, application/pdf">
             <label for="feed">Sorun ile ilgili dosyayı ekleyiniz</label>
         </div>
+
+        <div class="col-12 form-group">
+            <input type="file" name="multiFile[]" id="multiFile" multiple>
+            <label for="multiFile">Çoklu Dosya</label>
+        </div>
         <div class="col-12">
             <button type="submit" class="btn btn-success w-50 float-right">Gönder</button>
         </div>
