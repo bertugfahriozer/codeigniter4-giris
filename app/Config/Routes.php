@@ -43,6 +43,8 @@ $routes->get('tagDelete/(:num)', 'Home::tagDelete/$1');
 $routes->get('recoveryTag/(:num)', 'Home::recoveryTag/$1');
 $routes->get('deletedTags', 'Home::deletedTags');
 $routes->post('contactForm','Pageforms::contactForm',['as'=>'contactForm']);
+$routes->post('imgMan','Pageforms::imgMan',['as'=>'imgMan']);
+$routes->get('imgMan_view','Home::imgMan_view',['as'=>'imgMan_view']);
 
 $routes->get('basket','Product::basket');
 $routes->post('successfullBasket','Product::successfullBasket',['as'=>'successfullBasket']);

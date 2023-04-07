@@ -120,4 +120,9 @@ class Home extends BaseController
             $this->defData['tags'] = $tagModel->onlyDeleted()->findAll();
         return view('tagList', $this->defData);
     }
+
+    public function imgMan_view()
+    {
+        return view('imgMan', $this->defData);
+    }
 }
