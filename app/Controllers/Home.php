@@ -16,6 +16,8 @@ class Home extends BaseController
 
     public function productList()
     {
+        $this->secondModel->create('products_categories',['categoryName'=>rand(1,100).' kategorisi']);
+        dd($this->secondModel->lists('products_categories'));
         $this->defData['products'] =
             [
                 ['id' => 1,

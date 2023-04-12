@@ -45,7 +45,7 @@ abstract class BaseController extends Controller
     protected $navs;
     public $defData;
     public $commonModel;
-
+public $secondModel;
     /**
      * Constructor.
      */
@@ -54,6 +54,8 @@ abstract class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
         $this->commonModel = new CommonModel();
+        $this->secondModel = new CommonModel('secondDB');
+
         //--------------------------------------------------------------------
         // Preload any models, libraries, etc, here.
         //--------------------------------------------------------------------
